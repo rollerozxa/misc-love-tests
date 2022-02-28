@@ -27,6 +27,25 @@ function love.load()
 end
 
 function love.update(dt)
+	-- nudge the ball, applying small forces to move it in a specific direction in a natural manner
+	if love.keyboard.isDown('up') and not oldupdown then
+		ball.vel.y = ball.vel.y - 0.5
+	end
+	oldupdown = love.keyboard.isDown('left')
+	if love.keyboard.isDown('down') and not olddowndown then
+		ball.vel.y = ball.vel.y + 1
+	end
+	olddowndown = love.keyboard.isDown('down')
+
+	if love.keyboard.isDown('left') and not oldleftdown then
+		ball.vel.x = ball.vel.x - 5
+	end
+	oldleftdown = love.keyboard.isDown('left')
+	if love.keyboard.isDown('right') and not oldrightdown then
+		ball.vel.x = ball.vel.x + 5
+	end
+	oldrightdown = love.keyboard.isDown('right')
+
 	ball.vel.y = ball.vel.y + 9.82 * dt -- constant acceleration formula, assume gravitational constant in sweden
 
 	ball.x = ball.x + ball.vel.x
