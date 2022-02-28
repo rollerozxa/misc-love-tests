@@ -24,6 +24,8 @@ function math.round(a,x)
 end
 
 function love.load()
+	love.window.setMode(resolution.x, resolution.y)
+	font = love.graphics.newFont(24)
 end
 
 function love.update(dt)
@@ -70,6 +72,14 @@ function love.draw()
 	love.graphics.setColor(1,1,1)
 
 	love.graphics.rectangle("fill", 0, 655, resolution.x, 3)
+
+	love.graphics.setFont(font)
+	love.graphics.print(string.format("Velocity: (%.3f,%.3f)", ball.vel.x, ball.vel.y), 10, 10)
+
+	-- draw velocity forces
+	love.graphics.setColor(1,0,0)
+	love.graphics.line(ball.x, ball.y, ball.x + (ball.vel.x*10), ball.y) --X
+	love.graphics.line(ball.x, ball.y, ball.x, ball.y + (ball.vel.y*10)) --Y
 
 	step = step + 1
 end
